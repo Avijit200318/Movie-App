@@ -1,9 +1,24 @@
-import { Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
+import Img from "@/assets/images/bg.png"
+import Logo from "@/assets/images/home logo.png"
+import { SafeAreaView } from "react-native-safe-area-context";
+import SearchBar from "@/components/SearchBar";
+import { useRouter } from "expo-router";
 
 export default function Index() {
+  const router = useRouter();
+
   return (
-    <View className="flex-1 justify-center items-center">
-      <Text className="text-accent font-semibold">Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-primary">
+      <Image source={Img} className="absolute w-full z-0" />
+      <ScrollView className="flex-1 px-5 " showsVerticalScrollIndicator={false} contentContainerStyle={{
+        minHeight: "100%", paddingBottom: 10
+      }}>
+        <Image source={Logo} className="w-12 h-10 mt-4 mb-5 mx-auto" />
+        <View className="flex-1 mt-5">
+          <SearchBar placeholder="Search for a movie" onPress={()=> router.push("/search")} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
