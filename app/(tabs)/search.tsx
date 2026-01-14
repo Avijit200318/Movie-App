@@ -7,6 +7,7 @@ import useFetch from '@/services/useFetch'
 import { fetchPopularMovies } from '@/services/api'
 import MovieCard from '@/components/MovieCard'
 import SearchBar from '@/components/SearchBar'
+import { updateSearchCount } from '@/services/appwrite'
 
 const Search = () => {
 
@@ -29,6 +30,11 @@ const Search = () => {
     const timeoutId = setTimeout(async() => {
       if (searchQuery.trim()) {
         await loadMovies();
+
+        if(movies && (movies as Movie[]).length > 0 && movies?.[0]){
+          await updateSearchCount(searchQuery, movies[0]);
+        }
+
       } else{
         reset();
       }
