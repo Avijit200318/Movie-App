@@ -11,7 +11,7 @@ import MovieCard from "@/components/MovieCard";
 export default function Index() {
   const router = useRouter();
 
-  const { data: movies, loading: moviesLoading, error: moviesError } = useFetch(() => fetchPopularMovies())
+  const { data: movies, loading: moviesLoading, error: moviesError } = useFetch(() => fetchPopularMovies({query: ""}))
 
   return (
     <SafeAreaView className="flex-1 bg-primary">

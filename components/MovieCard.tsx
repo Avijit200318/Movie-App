@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
 
-const MovieCard = ({item}: Movie) => {
+const MovieCard = ({item}: {item: Movie}) => {
   return (
     <Link href={`/movies/${item.id}`} asChild>
         <TouchableOpacity className='w-[30%]'>
