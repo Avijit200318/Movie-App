@@ -5,8 +5,8 @@ import { Ionicons } from '@expo/vector-icons'
 interface Props {
   placeholder: string,
   onPress?: () => void,
-  value: string,
-  onChangeText: (text: string) => void
+  value?: string,
+  onChangeText?: (text: string) => void
 }
 
 const SearchBar = ({ placeholder, onPress, value, onChangeText }: Props) => {
@@ -14,6 +14,7 @@ const SearchBar = ({ placeholder, onPress, value, onChangeText }: Props) => {
     <View className='flex-row items-center bg-dark-200 rounded-full px-5 py-2'>
       <Ionicons size={18} name="search" color="#ab8bff" />
       <TextInput
+        onPress={onPress}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}

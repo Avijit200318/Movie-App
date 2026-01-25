@@ -51,4 +51,22 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
     }
 }
 
-// 2. 
+// 2. fetch trending movies from our db
+
+export const getTreandingMovies = async ():Promise<TrendingMovie[] | undefined> => {
+    try {
+        const result = await tables.listRows({
+            databaseId: DATABASE_ID,
+            tableId: TABLE_ID,
+            queries: [
+                Query.orderDesc("count"),
+                Query.limit(5)
+            ]
+        })
+
+        return result.rows as unknown as TrendingMovie[];
+    } catch (error) {
+        console.log("Appwrite route error: ", error);
+        return undefined
+    }
+}

@@ -31,10 +31,6 @@ const Search = () => {
       if (searchQuery.trim()) {
         await loadMovies();
 
-        if(movies && (movies as Movie[]).length > 0 && movies?.[0]){
-          await updateSearchCount(searchQuery, movies[0]);
-        }
-
       } else{
         reset();
       }
@@ -42,6 +38,12 @@ const Search = () => {
 
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
+
+  useEffect(() => {
+    if(movies && (movies as Movie[]).length > 0 && movies?.[0]){
+          updateSearchCount(searchQuery, movies[0]);
+        }
+  }, [movies]);
 
 
   return (
@@ -79,7 +81,7 @@ const Search = () => {
               </Text>
             )}
 
-            {!moviesLoading && !moviesError && searchQuery.trim() && movies?.length > 0 && (
+            {!moviesLoading && !moviesError && searchQuery.trim() && movies && movies?.length > 0 && (
               <Text className='text-xl text-white font-bold px-1 mb-3'>
                 Search Result for{' '}
                 <Text className='text-accent'>{searchQuery}</Text>
